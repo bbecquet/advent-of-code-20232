@@ -1,10 +1,4 @@
-import {
-  readMatrix,
-  findInMatrix,
-  logMatrix,
-  pairs,
-  transpose
-} from './utils.mjs'
+import { readMatrix, findInMatrix, pairs, transpose } from './utils.mjs'
 import * as R from 'ramda'
 
 const expansionRate = 1000000
@@ -21,8 +15,6 @@ const emptyLineIndices = (matrix) =>
 const emptyRows = emptyLineIndices(matrix)
 const emptyCols = emptyLineIndices(transpose(matrix))
 
-console.log(emptyRows, emptyCols)
-
 const galaxyDistance = ([[x1, y1], [x2, y2]]) => {
   const minX = Math.min(x1, x2)
   const minY = Math.min(y1, y2)
@@ -31,9 +23,7 @@ const galaxyDistance = ([[x1, y1], [x2, y2]]) => {
 
   return (
     R.sum(
-      rows.map((_, i) => {
-        return emptyRows.includes(minX + i) ? expansionRate : 1
-      })
+      rows.map((_, i) => (emptyRows.includes(minX + i) ? expansionRate : 1))
     ) +
     R.sum(
       cols.map((_, i) => (emptyCols.includes(minY + i) ? expansionRate : 1))
@@ -44,9 +34,7 @@ const galaxyDistance = ([[x1, y1], [x2, y2]]) => {
 R.pipe(
   findInMatrix((c) => c === '#'),
   pairs,
-  R.tap(console.log),
   R.map(galaxyDistance),
-  R.tap(console.log),
-  R.sum(),
+  R.sum,
   console.log
 )(matrix)

@@ -1,10 +1,4 @@
-import {
-  readMatrix,
-  findInMatrix,
-  logMatrix,
-  pairs,
-  transpose
-} from './utils.mjs'
+import { readMatrix, findInMatrix, pairs, transpose } from './utils.mjs'
 import * as R from 'ramda'
 
 const isEmptyLine = R.all(R.equals('.'))
@@ -21,12 +15,9 @@ const galaxyDistance = ([[x1, y1], [x2, y2]]) =>
 R.pipe(
   readMatrix,
   expandUniverse,
-  logMatrix,
   findInMatrix((c) => c === '#'),
   pairs,
-  R.tap(console.log),
   R.map(galaxyDistance),
-  R.tap(console.log),
-  R.sum(),
+  R.sum,
   console.log
 )('11.txt')

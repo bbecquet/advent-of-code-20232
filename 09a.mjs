@@ -16,7 +16,7 @@ const result = R.pipe(
   R.map(parseNumberList),
   R.map((numbers) => getNextLines([numbers])),
   R.map(getPrediction),
-  R.sum()
+  R.sum
 )('09.txt')
 
 console.log(result)

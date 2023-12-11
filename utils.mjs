@@ -31,6 +31,9 @@ export const parseNumberList = (str) =>
     .filter((t) => t)
     .map((n) => Number(n))
 
+export const pairs = (arr) =>
+  arr.map((v, i) => arr.slice(i + 1).map((w) => [v, w])).flat()
+
 export const findInMatrix = (predicate) => (matrix) => {
   const results = []
   for (let i = 0; i < matrix.length; i++) {
@@ -45,9 +48,6 @@ export const logMatrix = (matrix) => {
   console.log(matrix.map((line) => line.join('')).join('\n'))
   return matrix
 }
-
-export const pairs = (arr) =>
-  arr.map((v, i) => arr.slice(i + 1).map((w) => [v, w])).flat()
 
 export function transpose(matrix) {
   return matrix[0].map((col, c) => matrix.map((row, r) => matrix[r][c]))
